@@ -1,0 +1,65 @@
+
+I am very sure a lot of times this question might have come to your mind, what exactly the scope is in our Pom.xml file why to use and what is the purpose of this. In this blog, I will try my best to answer these questions.
+
+As per official maven documentation, Scope Tag in maven dependency is used to use to limit the transitivity of dependency or in simpler terms to define the scope or phase in which that dependency will actually work.
+
+The <Scope> the element can take six values in our pom.xml file:
+
+Ø  Compile 
+Ø  Provided
+Ø  Runtime
+Ø  Test
+Ø  System
+Ø  Import
+
+
+ 
+
+
+Now Let’s look into more details for all these six Scopes.
+
+Compile
+
+This is the maven default scope. This dependency is needed for the purpose of build, test and runs the project.
+Compile dependencies are available in all classpaths of a project. These dependencies are also transferred to dependent projects.
+For e.g, we need the JAR for compiling and running the web application
+
+Provided
+
+Provided is quite similar to compile and is used during build and test the project. This is also required to run, but should not be exported, because the dependency will be provided at the runtime by JDK or a container.
+
+e.g We need JAR for compiling the project, but at run time there is already a JAR provided by the environment so we don't need it to packaged again with our web application.
+
+
+
+ 
+
+RunTime
+
+This dependency is not required for build or compilation, but is required to test and run our project.
+
+Test
+
+Test are not needed to build and run the project. They are needed to compile and run the unit tests.
+
+System
+
+This is similar to provided and the only difference is system dependencies are not retrieved from remote repository. They are present under some project’s subdirectory and are referenced from there.
+
+For e.g some dependencies we might have created by our own and wanted to use it in our project.
+
+Import
+
+This scope is only supported on a dependency of type pom in the dependencyManagement section. Maven 2.0.9 or later replaces pom with dependencymanagement Section.
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>sample.pom.group.id</groupId>
+            <artifactId>sample-pom-artifact-id</artifactId>
+            <version>1.0.1</version>
+            <scope>import</scope>
+            <type>pom</type>
+        </dependency>  
+    </dependencies>
+</dependencyManagement>
+view rawdependencies hosted with ❤ by GitHub
